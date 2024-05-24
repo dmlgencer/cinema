@@ -42,10 +42,10 @@ namespace sinemaSalonları
         }
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count ==0)
+            if (textBox1.Text=="")
             {
                 MessageBox.Show("Lütfen Salon Bilgilerini Görüntüleyiniz.", "SALON BİLGİSİ HATASI", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                listBox1.Focus();
+                textBox1.Focus();
                 return;
             }
 
@@ -61,12 +61,12 @@ namespace sinemaSalonları
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            StreamReader streamReader = File.OpenText(@"C:\Users\borag\OneDrive\Masaüstü\salonlar.txt");
-            string metin; 
-            while ((metin = streamReader.ReadLine()) != null)
-            {
-                listBox1.Items.Add(metin);
-            }      
+            openFileDialog1.Title = "Dosya seçiniz";
+            openFileDialog1.Filter = "Tüm dosyalar|*.*";
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+
+            //textbox a bütün veriyi aktardık.
+            textBox1.Text = File.ReadAllText(openFileDialog1.FileName);
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
